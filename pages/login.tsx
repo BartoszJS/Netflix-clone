@@ -4,6 +4,7 @@ import Image from "next/image";
 import banner from "../public/banner.jpg";
 import logo from "../public/become-a-programmer-logo.svg";
 import { SubmitHandler, useForm } from "react-hook-form";
+import useAuth from "../hooks/useAuth";
 
 interface Inputs {
   email: string;
@@ -12,6 +13,7 @@ interface Inputs {
 
 const login = () => {
   const [login, setLogin] = useState(false);
+  const { signIn, signUp } = useAuth();
   const {
     register,
     handleSubmit,
@@ -19,7 +21,9 @@ const login = () => {
   } = useForm<Inputs>();
   const onSubmit: SubmitHandler<Inputs> = async ({ email, password }) => {
     if (login) {
+      await signIn(email, password);
     } else {
+      await signUp(email, password);
     }
   };
 

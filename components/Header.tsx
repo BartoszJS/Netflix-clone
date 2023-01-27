@@ -2,9 +2,12 @@ import logo from "../public/become-a-programmer-logo.svg";
 import { BellIcon, SearchIcon, UserCircleIcon } from "@heroicons/react/solid";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import useAuth from "../hooks/useAuth";
+import { BiLogOut } from "react-icons/bi";
 
 function Header() {
   const [isScrolled, setIsScrolled] = useState(false);
+  const { logout } = useAuth();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -45,6 +48,7 @@ function Header() {
         <Link href='/account'>
           <UserCircleIcon className=' sm:inline h-6 w-6 ' />
         </Link>
+        <BiLogOut onClick={logout} className=' sm:inline h-6 w-6 ' />
       </div>
     </header>
   );
